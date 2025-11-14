@@ -62,6 +62,8 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Custom accent color
+        'dyad-accent': '#ba2522', 
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -89,6 +91,9 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'], // Using Inter as the modern geometric sans-serif font
       },
     },
   },
