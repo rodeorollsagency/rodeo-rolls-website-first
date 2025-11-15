@@ -9,29 +9,39 @@ import { cn } from '@/lib/utils';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [isNavbarVisible, setIsNavbarVisible] = useState(false); // New state for navbar visibility
   const location = useLocation();
 
   const navItems = [
     { name: 'Start', to: 'home', type: 'scroll' },
     { name: 'Nasza oferta', to: '/oferta', type: 'router' },
-    { name: 'Oferta Twórców', to: '/oferta-tworcow', type: 'router' }, // Updated item for Creator Offer Page with shorter title and route
-    { name: 'Portfolio', to: 'portfolio', type: 'scroll' },
+    { name: 'Oferta Twórców', to: '/oferta-tworcow', type: 'router' },
+    { name: 'Nasze Prace', to: 'portfolio', type: 'scroll' }, // Updated text
     { name: 'Kontakt', to: 'contact', type: 'scroll' },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
+      // Navbar is always visible on subpages
       if (location.pathname !== '/') {
-        setActiveSection('');
+        setIsNavbarVisible(true);
+        setActiveSection(''); // Clear active section for subpages
         return;
       }
 
+      // Logic for homepage
+      const scrollPosition = window.scrollY;
+      const scrollThreshold = 100; // Navbar appears after scrolling 100px
+
+      setIsNavbarVisible(scrollPosition > scrollThreshold);
+
+      // Update active section for homepage
       const sections = navItems.filter(item => item.type === 'scroll').map(item => document.getElementById(item.to));
-      const scrollPosition = window.scrollY + window.innerHeight / 2;
+      const currentScrollPosition = window.scrollY + window.innerHeight / 2; // Center of the viewport
 
       let currentActive = 'home';
       for (const item of sections) {
-        if (item && scrollPosition >= item.offsetTop && scrollPosition < item.offsetTop + item.offsetHeight) {
+        if (item && currentScrollPosition >= item.offsetTop && currentScrollPosition < item.offsetTop + item.offsetHeight) {
           currentActive = item.id;
           break;
         }
@@ -39,13 +49,22 @@ const Navbar = () => {
       setActiveSection(currentActive);
     };
 
+    // Set initial visibility based on path
+    if (location.pathname !== '/') {
+      setIsNavbarVisible(true);
+    } else {
+      setIsNavbarVisible(window.scrollY > 100); // Check initial scroll position
+    }
+
     window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => window.removeEventListener('change', handleScroll);
+    handleScroll(); // Call once on mount to set initial state
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [navItems, location.pathname]);
 
-  // Navbar is always visible, no transparency logic needed
-  const navbarClasses = "fixed top-0 left-0 right-0 z-50 shadow-lg bg-black opacity-100 pointer-events-auto transition-all duration-500";
+  const navbarClasses = cn(
+    "fixed top-0 left-0 right-0 z-50 shadow-lg bg-black transition-all duration-500",
+    isNavbarVisible ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none -translate-y-full" // Hide and slide up when not visible
+  );
 
   return (
     <nav className={navbarClasses}>
@@ -68,7 +87,7 @@ const Navbar = () => {
                   to={item.to}
                   smooth={true}
                   duration={800}
-                  offset={-80}
+                  offset={-120} // Increased offset
                   onClick={() => {
                     setIsOpen(false);
                     // If on a subpage, navigate to home first, then scroll
@@ -124,7 +143,7 @@ const Navbar = () => {
                 to={item.to}
                 smooth={true}
                 duration={800}
-                offset={-80}
+                offset={-120} // Increased offset
                 onClick={() => {
                   setIsOpen(false);
                   if (location.pathname !== '/') {
