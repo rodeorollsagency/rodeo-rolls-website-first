@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
+import { Link as ScrollLink } from 'react-scroll';
 
 const HeroSection = () => {
   return (
@@ -29,7 +31,7 @@ const HeroSection = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1 }}
       >
-        Kreatywność bez granic
+        Dziki Zachód Cyfrowej Kreacji
       </motion.h1>
       <motion.p
         className="relative z-10 text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl px-4"
@@ -37,8 +39,26 @@ const HeroSection = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1.5 }}
       >
-        Tworzymy niezapomniane doświadczenia cyfrowe.
+        Tworzymy legendy, które podbijają rynek.
       </motion.p>
+
+      {/* Scroll Down Button */}
+      <motion.div
+        className="absolute bottom-8 z-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 2 }}
+      >
+        <ScrollLink
+          to="portfolio"
+          smooth={true}
+          duration={800}
+          className="cursor-pointer p-3 rounded-md bg-dyad-accent/70 hover:bg-dyad-accent transition-colors flex items-center justify-center"
+          aria-label="Scroll down"
+        >
+          <ChevronDown size={24} className="text-white" />
+        </ScrollLink>
+      </motion.div>
     </section>
   );
 };

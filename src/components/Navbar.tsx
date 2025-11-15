@@ -34,12 +34,12 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     // Set initial active section on mount
     handleScroll();
-    return () => window.removeEventListener('change', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [navItems]);
 
   return (
     <nav className={cn(
-      "fixed top-0 left-0 right-0 z-50 bg-black shadow-lg transition-opacity duration-500", // Changed to bg-black
+      "fixed top-0 left-0 right-0 z-50 bg-black shadow-lg transition-opacity duration-500",
       activeSection === 'home' ? "opacity-0 pointer-events-none" : "opacity-100 pointer-events-auto"
     )}>
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -50,7 +50,7 @@ const Navbar = () => {
           className="cursor-pointer text-lg font-bold text-foreground hover:text-dyad-accent transition-colors z-20"
           onClick={() => setIsOpen(false)}
         >
-          <img src="/images/rr.png" alt="Logo" className="h-8 w-auto" />
+          <img src="/images/rr.png" alt="Logo" className="h-10 w-auto" /> {/* Increased logo height to h-10 */}
         </ScrollLink>
 
         {/* Desktop Navigation */}
@@ -88,7 +88,7 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       {isOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-sm flex flex-col items-center py-4 space-y-4 shadow-lg animate-fade-in-down"> {/* Changed to bg-black/95 */}
+        <div className="md:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-sm flex flex-col items-center py-4 space-y-4 shadow-lg animate-fade-in-down">
           {navItems.map((item) => (
             <ScrollLink
               key={item.to}

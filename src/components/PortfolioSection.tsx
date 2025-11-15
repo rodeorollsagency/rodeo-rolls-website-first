@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 interface PortfolioItem {
   src: string;
   alt: string;
-  category: 'Branding' | 'Web Design' | 'Social Media & Print';
+  category: 'Branding' | 'Web Design' | 'Social Media' | 'Druk i Fizyczne'; // Updated categories
   caption: string;
 }
 
@@ -15,19 +15,19 @@ const portfolioItems: PortfolioItem[] = [
   { src: '/images/rodeo-rolls-branding.png', alt: 'Rodeo Rolls Branding', category: 'Branding', caption: 'Identyfikacja Wizualna Rodeo Rolls' },
   { src: '/images/rodeo-rolls-business-cards.jpg', alt: 'Rodeo Rolls Business Cards', category: 'Branding', caption: 'Wizytówki Rodeo Rolls' },
   { src: '/images/syriusz-wizytowka.png', alt: 'Syriusz Business Card', category: 'Branding', caption: 'Wizytówka Syriusz' },
-  { src: '/images/naklejka-na-drzwi.jpg', alt: 'Door Sticker', category: 'Branding', caption: 'Naklejka na Drzwi' },
-  { src: '/images/masaze-voucher.png', alt: 'Massage Voucher', category: 'Branding', caption: 'Voucher na Masaż' },
+  { src: '/images/naklejka-na-drzwi.jpg', alt: 'Door Sticker', category: 'Druk i Fizyczne', caption: 'Naklejka na Drzwi' }, // Recategorized
+  { src: '/images/masaze-voucher.png', alt: 'Massage Voucher', category: 'Druk i Fizyczne', caption: 'Voucher na Masaż' }, // Recategorized
   { src: '/images/babie-lato-website.png', alt: 'Babie Lato Website', category: 'Web Design', caption: 'Projekt Strony Babie Lato' },
   { src: '/images/syriusz-website.png', alt: 'Syriusz Website', category: 'Web Design', caption: 'Projekt Strony Syriusz' },
-  { src: '/images/masaze-social-media.png', alt: 'Massage Social Media Post', category: 'Social Media & Print', caption: 'Post Social Media Masaże' },
-  { src: '/images/syriusz-social-media.png', alt: 'Syriusz Social Media Post', category: 'Social Media & Print', caption: 'Post Social Media Syriusz' },
-  { src: '/images/posty-sm.png', alt: 'Social Media Posts', category: 'Social Media & Print', caption: 'Różne Posty Social Media' },
-  { src: '/images/plakaty.png', alt: 'Posters', category: 'Social Media & Print', caption: 'Projekty Plakatów' },
-  { src: '/images/okladka-ksiazki.png', alt: 'Book Cover', category: 'Social Media & Print', caption: 'Okładka Książki' },
-  { src: '/images/masaz-tydek.png', alt: 'Massage Tydek', category: 'Social Media & Print', caption: 'Grafika Masaż Tydek' },
+  { src: '/images/masaze-social-media.png', alt: 'Massage Social Media Post', category: 'Social Media', caption: 'Post Social Media Masaże' }, // Recategorized
+  { src: '/images/syriusz-social-media.png', alt: 'Syriusz Social Media Post', category: 'Social Media', caption: 'Post Social Media Syriusz' }, // Recategorized
+  { src: '/images/posty-sm.png', alt: 'Social Media Posts', category: 'Social Media', caption: 'Różne Posty Social Media' }, // Recategorized
+  { src: '/images/plakaty.png', alt: 'Posters', category: 'Druk i Fizyczne', caption: 'Projekty Plakatów' }, // Recategorized
+  { src: '/images/okladka-ksiazki.png', alt: 'Book Cover', category: 'Druk i Fizyczne', caption: 'Okładka Książki' }, // Recategorized
+  { src: '/images/masaz-tydek.png', alt: 'Massage Tydek', category: 'Druk i Fizyczne', caption: 'Grafika Masaż Tydek' }, // Recategorized
 ];
 
-const categories = ['Wszystkie', 'Branding', 'Web Design', 'Social Media & Print'];
+const categories = ['Wszystkie', 'Branding', 'Web Design', 'Social Media', 'Druk i Fizyczne']; // Updated categories
 
 const PortfolioSection = () => {
   const [filter, setFilter] = useState('Wszystkie');
@@ -66,7 +66,7 @@ const PortfolioSection = () => {
               key={cat}
               onClick={() => setFilter(cat)}
               className={cn(
-                "px-6 py-2 rounded-full text-lg font-medium transition-all duration-300",
+                "px-6 py-2 rounded-md text-lg font-medium transition-all duration-300", // Changed to rounded-md
                 filter === cat
                   ? "bg-dyad-accent text-white shadow-lg"
                   : "bg-gray-800 text-muted-foreground hover:bg-gray-700 hover:text-foreground"
@@ -78,7 +78,7 @@ const PortfolioSection = () => {
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8" // Adjusted grid columns for larger images
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8"
           initial="hidden"
           animate="visible"
           variants={{
@@ -101,10 +101,11 @@ const PortfolioSection = () => {
               <img
                 src={item.src}
                 alt={item.alt}
-                className="w-full h-80 object-cover object-center transition-transform duration-500 group-hover:scale-110 lazyload" // Increased height to h-80
+                className="w-full h-80 object-cover object-center transition-transform duration-500 group-hover:scale-110 lazyload"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-black/50 group-hover:bg-dyad-accent/50 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end p-4"> {/* Added dyad-accent overlay */}
+              {/* Subtle gradient overlay from bottom */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end p-4">
                 <p className="text-white text-lg font-semibold translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                   {item.caption}
                 </p>
