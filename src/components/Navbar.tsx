@@ -9,55 +9,43 @@ import { cn } from '@/lib/utils';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-  const [isScrolled, setIsScrolled] = useState(false); // New state for scroll detection
   const location = useLocation();
 
   const navItems = [
     { name: 'Start', to: 'home', type: 'scroll' },
     { name: 'Nasza oferta', to: '/oferta', type: 'router' },
-    { name: 'Oferta Twórców', to: '/oferta-tworcow', type: 'router' },
-    { name: 'Nasze prace', to: 'portfolio', type: 'scroll' }, // Updated name here as well
+    { name: 'Oferta Twórców', to: '/oferta-tworcow', type: 'router' }, // Updated item for Creator Offer Page with shorter title and route
+    { name: 'Portfolio', to: 'portfolio', type: 'scroll' },
     { name: 'Kontakt', to: 'contact', type: 'scroll' },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      if (location.pathname === '/') {
-        setIsScrolled(window.scrollY > 50); // Navbar appears after scrolling 50px on homepage
-      } else {
-        setIsScrolled(true); // Navbar is always visible on subpages
+      if (location.pathname !== '/') {
+        setActiveSection('');
+        return;
       }
 
-      // Logic for active section highlighting on homepage
-      if (location.pathname === '/') {
-        const sections = navItems.filter(item => item.type === 'scroll').map(item => document.getElementById(item.to));
-        const scrollPosition = window.scrollY + window.innerHeight / 2;
+      const sections = navItems.filter(item => item.type === 'scroll').map(item => document.getElementById(item.to));
+      const scrollPosition = window.scrollY + window.innerHeight / 2;
 
-        let currentActive = 'home';
-        for (const item of sections) {
-          if (item && scrollPosition >= item.offsetTop && scrollPosition < item.offsetTop + item.offsetHeight) {
-            currentActive = item.id;
-            break;
-          }
+      let currentActive = 'home';
+      for (const item of sections) {
+        if (item && scrollPosition >= item.offsetTop && scrollPosition < item.offsetTop + item.offsetHeight) {
+          currentActive = item.id;
+          break;
         }
-        setActiveSection(currentActive);
-      } else {
-        setActiveSection(''); // No active section highlighting on subpages for scroll links
       }
+      setActiveSection(currentActive);
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Call once on mount to set initial state
-    return () => window.removeEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('change', handleScroll);
   }, [navItems, location.pathname]);
 
-  const navbarClasses = cn(
-    "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-    {
-      "bg-black shadow-lg": isScrolled || location.pathname !== '/', // Visible on scroll or on subpages
-      "bg-transparent shadow-none": !isScrolled && location.pathname === '/', // Transparent on homepage, not scrolled
-    }
-  );
+  // Navbar is always visible, no transparency logic needed
+  const navbarClasses = "fixed top-0 left-0 right-0 z-50 shadow-lg bg-black opacity-100 pointer-events-auto transition-all duration-500";
 
   return (
     <nav className={navbarClasses}>

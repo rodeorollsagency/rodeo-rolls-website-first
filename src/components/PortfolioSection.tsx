@@ -48,7 +48,7 @@ const PortfolioSection = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8 }}
         >
-          Nasze prace
+          Nasze Portfolio
         </motion.h2>
 
         <motion.div
