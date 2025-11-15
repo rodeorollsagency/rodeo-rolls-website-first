@@ -44,7 +44,7 @@ const HeroSection = () => {
 
       {/* Scroll Down Button */}
       <motion.div
-        className="absolute bottom-8 z-10"
+        className="absolute bottom-24 z-10" {/* Changed from bottom-8 to bottom-24 */}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 2 }}
