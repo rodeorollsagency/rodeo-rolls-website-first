@@ -10,53 +10,42 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const location = useLocation();
-  const isHomepage = location.pathname === '/';
 
   const navItems = [
     { name: 'Start', to: 'home', type: 'scroll' },
     { name: 'Nasza oferta', to: '/oferta', type: 'router' },
-    { name: 'Oferta Twórców', to: '/oferta-tworcow', type: 'router' },
+    { name: 'Oferta Twórców', to: '/oferta-tworcow', type: 'router' }, // Updated item for Creator Offer Page with shorter title and route
     { name: 'Portfolio', to: 'portfolio', type: 'scroll' },
     { name: 'Kontakt', to: 'contact', type: 'scroll' },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      if (isHomepage) { // Only track scroll for homepage sections
-        const sections = navItems.filter(item => item.type === 'scroll').map(item => document.getElementById(item.to));
-        const scrollPosition = window.scrollY + window.innerHeight / 2;
-
-        let currentActive = 'home';
-        for (const item of sections) {
-          if (item && scrollPosition >= item.offsetTop && scrollPosition < item.offsetTop + item.offsetHeight) {
-            currentActive = item.id;
-            break;
-          }
-        }
-        setActiveSection(currentActive);
-      } else {
-        setActiveSection(''); // Clear active section if not on homepage
+      if (location.pathname !== '/') {
+        setActiveSection('');
+        return;
       }
+
+      const sections = navItems.filter(item => item.type === 'scroll').map(item => document.getElementById(item.to));
+      const scrollPosition = window.scrollY + window.innerHeight / 2;
+
+      let currentActive = 'home';
+      for (const item of sections) {
+        if (item && scrollPosition >= item.offsetTop && scrollPosition < item.offsetTop + item.offsetHeight) {
+          currentActive = item.id;
+          break;
+        }
+      }
+      setActiveSection(currentActive);
     };
 
-    if (isHomepage) {
-      window.addEventListener('scroll', handleScroll);
-      handleScroll(); // Initial check
-    } else {
-      window.removeEventListener('scroll', handleScroll); // Clean up listener if not on homepage
-    }
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [navItems, isHomepage]);
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('change', handleScroll);
+  }, [navItems, location.pathname]);
 
-  // Navbar is hidden on homepage, visible on subpages
-  const navbarClasses = cn(
-    "fixed top-0 left-0 right-0 z-50 shadow-lg bg-black opacity-100 pointer-events-auto transition-all duration-500",
-    isHomepage && "hidden" // Hide navbar completely on the homepage
-  );
-
-  if (isHomepage) {
-    return null; // Render nothing if on homepage
-  }
+  // Navbar is always visible, no transparency logic needed
+  const navbarClasses = "fixed top-0 left-0 right-0 z-50 shadow-lg bg-black opacity-100 pointer-events-auto transition-all duration-500";
 
   return (
     <nav className={navbarClasses}>
