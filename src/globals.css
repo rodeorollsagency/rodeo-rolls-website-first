@@ -61,3 +61,17 @@
     @apply border-border;
   }
 }
+
+@media print {
+  nav, footer {
+    display: none !important;
+  }
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+  /* Ensure text is readable on print */
+  h1, h2, h3, p, a {
+    color: black !important;
+  }
+}

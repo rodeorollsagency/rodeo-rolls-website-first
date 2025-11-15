@@ -34,12 +34,12 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     // Set initial active section on mount
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('change', handleScroll);
   }, [navItems]);
 
   return (
     <nav className={cn(
-      "fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm shadow-lg transition-opacity duration-500",
+      "fixed top-0 left-0 right-0 z-50 bg-black shadow-lg transition-opacity duration-500", // Changed to bg-black
       activeSection === 'home' ? "opacity-0 pointer-events-none" : "opacity-100 pointer-events-auto"
     )}>
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -47,14 +47,14 @@ const Navbar = () => {
           to="home"
           smooth={true}
           duration={800}
-          className="cursor-pointer text-lg font-bold text-foreground hover:text-dyad-accent transition-colors z-20" // Ensure logo is above mobile menu
-          onClick={() => setIsOpen(false)} // Close mobile menu on logo click
+          className="cursor-pointer text-lg font-bold text-foreground hover:text-dyad-accent transition-colors z-20"
+          onClick={() => setIsOpen(false)}
         >
           <img src="/images/rr.png" alt="Logo" className="h-8 w-auto" />
         </ScrollLink>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex flex-grow justify-center"> {/* Added flex-grow and justify-center */}
+        <div className="hidden md:flex flex-grow justify-center">
           <div className="space-x-8">
             {navItems.map((item) => (
               <ScrollLink
@@ -62,7 +62,8 @@ const Navbar = () => {
                 to={item.to}
                 smooth={true}
                 duration={800}
-                offset={-80} // Adjust offset for sticky header
+                offset={-80}
+                onClick={() => setIsOpen(false)}
                 className={cn(
                   "relative text-foreground hover:text-dyad-accent transition-colors cursor-pointer",
                   activeSection === item.to && "text-dyad-accent"
@@ -78,7 +79,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Hamburger Menu */}
-        <div className="md:hidden z-20"> {/* Ensure hamburger is above mobile menu */}
+        <div className="md:hidden z-20">
           <button onClick={() => setIsOpen(!isOpen)} className="text-foreground hover:text-dyad-accent">
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -87,7 +88,7 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       {isOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-background/95 backdrop-blur-sm flex flex-col items-center py-4 space-y-4 shadow-lg animate-fade-in-down">
+        <div className="md:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-sm flex flex-col items-center py-4 space-y-4 shadow-lg animate-fade-in-down"> {/* Changed to bg-black/95 */}
           {navItems.map((item) => (
             <ScrollLink
               key={item.to}

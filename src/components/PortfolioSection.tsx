@@ -78,7 +78,7 @@ const PortfolioSection = () => {
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8" // Adjusted grid columns for larger images
           initial="hidden"
           animate="visible"
           variants={{
@@ -101,10 +101,10 @@ const PortfolioSection = () => {
               <img
                 src={item.src}
                 alt={item.alt}
-                className="w-full h-64 object-cover object-center transition-transform duration-500 group-hover:scale-110 lazyload"
+                className="w-full h-80 object-cover object-center transition-transform duration-500 group-hover:scale-110 lazyload" // Increased height to h-80
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+              <div className="absolute inset-0 bg-black/50 group-hover:bg-dyad-accent/50 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end p-4"> {/* Added dyad-accent overlay */}
                 <p className="text-white text-lg font-semibold translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                   {item.caption}
                 </p>
