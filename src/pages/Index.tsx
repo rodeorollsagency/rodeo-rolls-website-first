@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import { motion } from 'framer-motion';
 import { Link as ScrollLink } from 'react-scroll';
 import { Link as RouterLink } from 'react-router-dom';
-import { Button } from "@/components/ui/button"; // Assuming shadcn Button is suitable or will be styled
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
   return (
@@ -16,8 +16,8 @@ const Index = () => {
       <Navbar />
       <HeroSection />
 
-      {/* New Navigation Buttons Section */}
-      <section className="py-20 bg-gray-950 text-foreground">
+      {/* Navigation Buttons Section - moved directly below HeroSection */}
+      <section className="relative z-10 -mt-20 pb-20 bg-transparent text-foreground"> {/* Adjusted margin-top to overlap Hero slightly */}
         <div className="container mx-auto px-4 text-center">
           <motion.div
             className="flex flex-col sm:flex-row justify-center gap-6"
