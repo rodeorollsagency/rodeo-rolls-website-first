@@ -2,7 +2,6 @@
 
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import OfferSection from "@/components/OfferSection"; // Import the new OfferSection
 import PortfolioSection from "@/components/PortfolioSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
@@ -12,7 +11,7 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
       <HeroSection />
-      <OfferSection /> {/* Add the new OfferSection here */}
+      {/* OfferSection has been moved to a separate page */}
       <PortfolioSection />
       <ContactSection />
       <Footer />
