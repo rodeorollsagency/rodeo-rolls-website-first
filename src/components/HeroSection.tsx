@@ -9,7 +9,7 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative h-screen w-full flex flex-col items-center justify-center text-center overflow-hidden bg-black"
+      className="relative h-screen w-full flex flex-col items-center justify-center text-center overflow-hidden bg-black pt-20" // Added pt-20 to account for fixed navbar
     >
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
@@ -44,7 +44,7 @@ const HeroSection = () => {
 
       {/* Scroll Down Button */}
       <motion.div
-        className="absolute bottom-40 z-10"
+        className="absolute bottom-24 z-10" // Changed from bottom-40 to bottom-24 to move it lower
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 2 }}
