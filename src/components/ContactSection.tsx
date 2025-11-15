@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone } from 'lucide-react';
+import { Mail, Phone, Instagram, Facebook } from 'lucide-react'; // Added Instagram and Facebook
 
 const ContactSection = () => {
   return (
@@ -39,6 +39,26 @@ const ContactSection = () => {
             <Phone size={32} className="mr-4 text-dyad-accent group-hover:scale-110 transition-transform" />
             +48 796172745
           </a>
+          <div className="flex space-x-8 mt-8"> {/* Added social media links */}
+            <a
+              href="https://www.instagram.com/rodeorolls"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-dyad-accent hover:text-foreground transition-colors group"
+              aria-label="Instagram"
+            >
+              <Instagram size={32} className="group-hover:scale-110 transition-transform" />
+            </a>
+            <a
+              href="https://www.facebook.com/RodeoRollsCreative"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-dyad-accent hover:text-foreground transition-colors group"
+              aria-label="Facebook"
+            >
+              <Facebook size={32} className="group-hover:scale-110 transition-transform" />
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>

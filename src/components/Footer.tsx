@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { Facebook, Instagram, Linkedin } from 'lucide-react';
+import { Facebook, Instagram } from 'lucide-react'; // Removed Linkedin
 
 const Footer = () => {
   return (
@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-center space-x-6 mb-4">
           <a
-            href="https://www.facebook.com/rodeorolls"
+            href="https://www.facebook.com/RodeoRollsCreative" // Updated Facebook link
             target="_blank"
             rel="noopener noreferrer"
             className="text-dyad-accent hover:text-foreground transition-colors"
@@ -26,15 +26,7 @@ const Footer = () => {
           >
             <Instagram size={24} />
           </a>
-          <a
-            href="https://www.linkedin.com/company/rodeorolls"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-dyad-accent hover:text-foreground transition-colors"
-            aria-label="LinkedIn"
-          >
-            <Linkedin size={24} />
-          </a>
+          {/* LinkedIn link removed as per request */}
         </div>
         <p>&copy; {new Date().getFullYear()} Rodeo Rolls. Wszelkie prawa zastrzeżone.</p>
       </div>
