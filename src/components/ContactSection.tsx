@@ -6,8 +6,16 @@ import { Mail, Phone, Instagram, Facebook } from 'lucide-react'; // Added Instag
 
 const ContactSection = () => {
   return (
-    <section id="contact" className="min-h-screen flex items-center justify-center py-20 bg-gray-900 text-foreground">
-      <div className="container mx-auto px-4 text-center">
+    <section id="contact" className="relative min-h-screen flex flex-col items-center justify-center py-20 bg-black text-foreground overflow-hidden">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
+        style={{ backgroundImage: 'url(/images/rrtlo.jpg)', backgroundAttachment: 'fixed' }}
+      ></div>
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+
+      <div className="relative z-10 container mx-auto px-4 text-center">
         <motion.h2
           className="text-5xl font-bold mb-12 text-dyad-accent"
           initial={{ opacity: 0, y: -50 }}
