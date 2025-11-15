@@ -17,7 +17,7 @@ const Index = () => {
       <HeroSection />
 
       {/* Navigation Buttons Section - moved directly below HeroSection */}
-      <section className="relative z-10 -mt-48 pb-20 bg-transparent text-foreground"> {/* Adjusted margin-top to move higher */}
+      <section className="relative z-10 -mt-56 pb-20 bg-transparent text-foreground"> {/* Adjusted margin-top to move higher */}
         <div className="container mx-auto px-4 text-center">
           <motion.div
             className="flex flex-col sm:flex-row justify-center gap-6"

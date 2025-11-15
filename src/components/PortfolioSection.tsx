@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 interface PortfolioItem {
   src: string;
   alt: string;
-  category: 'Branding' | 'Web Design' | 'Social Media' | 'Druk i Fizyczne'; // Updated categories
+  category: 'Branding' | 'Web Design' | 'Druk i Fizyczne'; // Updated categories
   caption: string;
 }
 
@@ -15,19 +15,16 @@ const portfolioItems: PortfolioItem[] = [
   { src: '/images/rodeo-rolls-branding.png', alt: 'Rodeo Rolls Branding', category: 'Branding', caption: 'Identyfikacja Wizualna Rodeo Rolls' },
   { src: '/images/rodeo-rolls-business-cards.jpg', alt: 'Rodeo Rolls Business Cards', category: 'Branding', caption: 'Wizytówki Rodeo Rolls' },
   { src: '/images/syriusz-wizytowka.png', alt: 'Syriusz Business Card', category: 'Branding', caption: 'Wizytówka Syriusz' },
-  { src: '/images/naklejka-na-drzwi.jpg', alt: 'Door Sticker', category: 'Druk i Fizyczne', caption: 'Naklejka na Drzwi' }, // Recategorized
-  { src: '/images/masaze-voucher.png', alt: 'Massage Voucher', category: 'Druk i Fizyczne', caption: 'Voucher na Masaż' }, // Recategorized
+  { src: '/images/naklejka-na-drzwi.jpg', alt: 'Door Sticker', category: 'Druk i Fizyczne', caption: 'Naklejka na Drzwi' },
+  { src: '/images/masaze-voucher.png', alt: 'Massage Voucher', category: 'Druk i Fizyczne', caption: 'Voucher na Masaż' },
   { src: '/images/babie-lato-website.png', alt: 'Babie Lato Website', category: 'Web Design', caption: 'Projekt Strony Babie Lato' },
   { src: '/images/syriusz-website.png', alt: 'Syriusz Website', category: 'Web Design', caption: 'Projekt Strony Syriusz' },
-  { src: '/images/masaze-social-media.png', alt: 'Massage Social Media Post', category: 'Social Media', caption: 'Post Social Media Masaże' }, // Recategorized
-  { src: '/images/syriusz-social-media.png', alt: 'Syriusz Social Media Post', category: 'Social Media', caption: 'Post Social Media Syriusz' }, // Recategorized
-  { src: '/images/posty-sm.png', alt: 'Social Media Posts', category: 'Social Media', caption: 'Różne Posty Social Media' }, // Recategorized
-  { src: '/images/plakaty.png', alt: 'Posters', category: 'Druk i Fizyczne', caption: 'Projekty Plakatów' }, // Recategorized
-  { src: '/images/okladka-ksiazki.png', alt: 'Book Cover', category: 'Druk i Fizyczne', caption: 'Okładka Książki' }, // Recategorized
-  { src: '/images/masaz-tydek.png', alt: 'Massage Tydek', category: 'Druk i Fizyczne', caption: 'Grafika Masaż Tydek' }, // Recategorized
+  { src: '/images/plakaty.png', alt: 'Posters', category: 'Druk i Fizyczne', caption: 'Projekty Plakatów' },
+  { src: '/images/okladka-ksiazki.png', alt: 'Book Cover', category: 'Druk i Fizyczne', caption: 'Okładka Książki' },
+  { src: '/images/masaz-tydek.png', alt: 'Massage Tydek', category: 'Druk i Fizyczne', caption: 'Grafika Masaż Tydek' },
 ];
 
-const categories = ['Wszystkie', 'Branding', 'Web Design', 'Social Media', 'Druk i Fizyczne']; // Updated categories
+const categories = ['Wszystkie', 'Branding', 'Web Design', 'Druk i Fizyczne']; // Updated categories
 
 const PortfolioSection = () => {
   const [filter, setFilter] = useState('Wszystkie');
