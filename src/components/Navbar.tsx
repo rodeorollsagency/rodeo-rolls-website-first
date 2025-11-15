@@ -14,7 +14,7 @@ const Navbar = () => {
   const navItems = [
     { name: 'Start', to: 'home', type: 'scroll' },
     { name: 'Nasza oferta', to: '/oferta', type: 'router' },
-    { name: 'Oferta dla streamerów', to: '/oferta-dla-streamerow', type: 'router' }, // New item for Streamer Offer Page
+    { name: 'Oferta dla twórców internetowych', to: '/oferta-dla-tworcow-internetowych', type: 'router' }, // Updated item for Creator Offer Page
     { name: 'Portfolio', to: 'portfolio', type: 'scroll' },
     { name: 'Kontakt', to: 'contact', type: 'scroll' },
   ];
@@ -56,7 +56,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <RouterLink
           to="/"
-          className="cursor-pointer text-lg font-bold text-foreground hover:text-dyad-accent transition-colors z-20"
+          className="cursor-pointer text-lg font-bold text-white hover:text-dyad-accent transition-colors z-20" // Ensure text-white
           onClick={() => setIsOpen(false)}
         >
           <img src="/images/rr.png" alt="Logo" className="h-10 w-auto" />

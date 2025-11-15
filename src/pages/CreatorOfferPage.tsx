@@ -6,16 +6,16 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { MonitorPlay, Camera, Megaphone, Palette, Share2, Video, BookOpen } from 'lucide-react'; // Icons for streamer services
+import { MonitorPlay, Camera, Megaphone, Palette, Share2, Video, BookOpen } from 'lucide-react'; // Icons for creator services
 
-interface StreamerOfferItem {
+interface CreatorOfferItem {
   title: string;
   icon: React.ElementType;
   description: string;
   details: string[];
 }
 
-const streamerOfferItems: StreamerOfferItem[] = [
+const creatorOfferItems: CreatorOfferItem[] = [
   {
     title: "Projektowanie Layoutów",
     icon: MonitorPlay,
@@ -71,7 +71,7 @@ const streamerOfferItems: StreamerOfferItem[] = [
   {
     title: "Szkolenia i Konsultacje",
     icon: BookOpen, // Reusing BookOpen for training
-    description: "Indywidualne wsparcie w rozwoju Twojej marki streamera.",
+    description: "Indywidualne wsparcie w rozwoju Twojej marki twórcy internetowego.",
     details: [
       "Szkolenia z obsługi oprogramowania do streamowania (OBS, Streamlabs)",
       "Konsultacje dotyczące strategii rozwoju kanału",
@@ -80,13 +80,13 @@ const streamerOfferItems: StreamerOfferItem[] = [
   },
 ];
 
-const StreamerOfferPage = () => {
-  const [selectedItem, setSelectedItem] = useState<StreamerOfferItem | null>(null);
+const CreatorOfferPage = () => {
+  const [selectedItem, setSelectedItem] = useState<CreatorOfferItem | null>(null);
 
   return (
     <div className="min-h-screen bg-black text-white"> {/* Solid black background, white text */}
       <Navbar />
-      <section id="streamer-offer-page" className="py-20 pt-32 bg-black text-white">
+      <section id="creator-offer-page" className="py-20 pt-32 bg-black text-white">
         <div className="container mx-auto px-4 text-center">
           <motion.h2
             className="text-5xl font-bold mb-12 text-dyad-accent"
@@ -94,7 +94,7 @@ const StreamerOfferPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Oferta dla Streamerów
+            Oferta dla twórców internetowych
           </motion.h2>
 
           <motion.div
@@ -103,12 +103,12 @@ const StreamerOfferPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            {streamerOfferItems.map((item, index) => {
+            {creatorOfferItems.map((item, index) => {
               const IconComponent = item.icon;
               return (
                 <Card
                   key={index}
-                  className="bg-gray-900 border border-gray-800 hover:border-dyad-accent transition-all duration-300 cursor-pointer group shadow-lg rounded-lg"
+                  className="bg-gray-900 border border-gray-800 hover:border-dyad-accent transition-all duration-300 cursor-pointer group shadow-lg rounded-none" // Changed to rounded-none
                   onClick={() => setSelectedItem(item)}
                 >
                   <CardContent className="flex flex-col items-center justify-center p-6 h-full">
@@ -128,7 +128,7 @@ const StreamerOfferPage = () => {
 
       {/* Dialog for displaying detailed item information */}
       <Dialog open={!!selectedItem} onOpenChange={() => setSelectedItem(null)}>
-        <DialogContent className="sm:max-w-[600px] bg-gray-900 text-white border-gray-700">
+        <DialogContent className="sm:max-w-[600px] bg-gray-900 text-white border-gray-700 rounded-none"> {/* Changed to rounded-none */}
           <DialogHeader>
             <DialogTitle className="text-dyad-accent text-3xl mb-2">{selectedItem?.title}</DialogTitle>
             <DialogDescription className="text-muted-foreground text-lg">
@@ -149,4 +149,4 @@ const StreamerOfferPage = () => {
   );
 };
 
-export default StreamerOfferPage;
+export default CreatorOfferPage;

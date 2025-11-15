@@ -66,7 +66,7 @@ const PortfolioSection = () => {
               key={cat}
               onClick={() => setFilter(cat)}
               className={cn(
-                "px-6 py-2 rounded-md text-lg font-medium transition-all duration-300", // Changed to rounded-md
+                "px-6 py-2 rounded-none text-lg font-medium transition-all duration-300", // Changed to rounded-none
                 filter === cat
                   ? "bg-dyad-accent text-white shadow-lg"
                   : "bg-gray-800 text-muted-foreground hover:bg-gray-700 hover:text-foreground"
@@ -92,7 +92,7 @@ const PortfolioSection = () => {
           {filteredItems.map((item, index) => (
             <motion.div
               key={index}
-              className="relative group overflow-hidden rounded-lg shadow-xl bg-gray-800"
+              className="relative group overflow-hidden rounded-none shadow-xl bg-gray-800" // Changed to rounded-none
               variants={itemVariants}
               viewport={{ once: true, amount: 0.1 }}
               whileHover={{ scale: 1.03 }}

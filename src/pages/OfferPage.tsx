@@ -94,7 +94,7 @@ const OfferPage = () => {
               return (
                 <Card
                   key={index}
-                  className="bg-gray-900 border border-gray-800 hover:border-dyad-accent transition-all duration-300 cursor-pointer group shadow-lg rounded-lg"
+                  className="bg-gray-900 border border-gray-800 hover:border-dyad-accent transition-all duration-300 cursor-pointer group shadow-lg rounded-none" // Changed to rounded-none
                   onClick={() => setSelectedCategory(category)}
                 >
                   <CardContent className="flex flex-col items-center justify-center p-6 h-full">
@@ -113,7 +113,7 @@ const OfferPage = () => {
 
       {/* Dialog for displaying detailed category information */}
       <Dialog open={!!selectedCategory} onOpenChange={() => setSelectedCategory(null)}>
-        <DialogContent className="sm:max-w-[600px] bg-gray-900 text-foreground border-gray-700">
+        <DialogContent className="sm:max-w-[600px] bg-gray-900 text-foreground border-gray-700 rounded-none"> {/* Changed to rounded-none */}
           <DialogHeader>
             <DialogTitle className="text-dyad-accent text-3xl mb-2">{selectedCategory?.title}</DialogTitle>
             <DialogDescription className="text-muted-foreground text-lg">

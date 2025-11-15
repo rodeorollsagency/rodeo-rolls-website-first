@@ -27,17 +27,17 @@ const Index = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <RouterLink to="/oferta">
-              <Button className="w-full sm:w-auto px-8 py-6 text-lg bg-black text-white hover:bg-dyad-accent hover:text-white transition-all duration-300 rounded-lg shadow-lg border border-gray-800 hover:border-dyad-accent">
+              <Button className="w-full sm:w-auto px-8 py-6 text-lg bg-black text-white hover:bg-dyad-accent hover:text-white transition-all duration-300 rounded-none shadow-lg border border-gray-800 hover:border-dyad-accent"> {/* Changed to rounded-none */}
                 Nasza oferta
               </Button>
             </RouterLink>
             <ScrollLink to="portfolio" smooth={true} duration={800} offset={-80}>
-              <Button className="w-full sm:w-auto px-8 py-6 text-lg bg-black text-white hover:bg-dyad-accent hover:text-white transition-all duration-300 rounded-lg shadow-lg border border-gray-800 hover:border-dyad-accent">
+              <Button className="w-full sm:w-auto px-8 py-6 text-lg bg-black text-white hover:bg-dyad-accent hover:text-white transition-all duration-300 rounded-none shadow-lg border border-gray-800 hover:border-dyad-accent"> {/* Changed to rounded-none */}
                 Portfolio
               </Button>
             </ScrollLink>
             <ScrollLink to="contact" smooth={true} duration={800} offset={-80}>
-              <Button className="w-full sm:w-auto px-8 py-6 text-lg bg-black text-white hover:bg-dyad-accent hover:text-white transition-all duration-300 rounded-lg shadow-lg border border-gray-800 hover:border-dyad-accent">
+              <Button className="w-full sm:w-auto px-8 py-6 text-lg bg-black text-white hover:bg-dyad-accent hover:text-white transition-all duration-300 rounded-none shadow-lg border border-gray-800 hover:border-dyad-accent"> {/* Changed to rounded-none */}
                 Kontakt
               </Button>
             </ScrollLink>
