@@ -21,7 +21,6 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Only track active section on the homepage
       if (location.pathname !== '/') {
         setActiveSection('');
         return;
@@ -42,8 +41,13 @@ const Navbar = () => {
 
     window.addEventListener('scroll', handleScroll);
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll); // Corrected event listener cleanup
+    return () => window.removeEventListener('change', handleScroll);
   }, [navItems, location.pathname]);
+
+  // If on the homepage, do not render the Navbar
+  if (location.pathname === '/') {
+    return null;
+  }
 
   const navbarClasses = "fixed top-0 left-0 right-0 z-50 shadow-lg bg-black opacity-100 pointer-events-auto transition-all duration-500";
 
