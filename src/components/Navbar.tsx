@@ -14,7 +14,7 @@ const Navbar = () => {
   const navItems = [
     { name: 'Start', to: 'home', type: 'scroll' },
     { name: 'Nasza oferta', to: '/oferta', type: 'router' },
-    { name: 'Oferta Twórców', to: '/oferta-tworcow', type: 'router' }, // Updated item for Creator Offer Page with shorter title and route
+    { name: 'Oferta Twórców', to: '/oferta-tworcow', type: 'router' },
     { name: 'Portfolio', to: 'portfolio', type: 'scroll' },
     { name: 'Kontakt', to: 'contact', type: 'scroll' },
   ];
@@ -44,7 +44,11 @@ const Navbar = () => {
     return () => window.removeEventListener('change', handleScroll);
   }, [navItems, location.pathname]);
 
-  // Navbar is always visible, no transparency logic needed
+  // If on the homepage, do not render the Navbar
+  if (location.pathname === '/') {
+    return null;
+  }
+
   const navbarClasses = "fixed top-0 left-0 right-0 z-50 shadow-lg bg-black opacity-100 pointer-events-auto transition-all duration-500";
 
   return (
