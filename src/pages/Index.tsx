@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Navbar /> {/* Navbar will be null on homepage */}
+      <Navbar /> {/* Navbar is now always rendered */}
       <HeroSection />
 
       {/* Navigation Buttons Section - moved directly below HeroSection */}

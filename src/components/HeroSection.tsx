@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
-import { Link as ScrollLink } from 'react-scroll';
+// Removed ChevronDown import as it's no longer needed
+// Removed ScrollLink import as it's no longer needed
 
 const HeroSection = () => {
   return (
@@ -42,23 +42,7 @@ const HeroSection = () => {
         Tworzymy legendy, które podbijają rynek.
       </motion.p>
 
-      {/* Scroll Down Button */}
-      <motion.div
-        className="absolute bottom-40 z-10"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 2 }}
-      >
-        <ScrollLink
-          to="portfolio"
-          smooth={true}
-          duration={800}
-          className="cursor-pointer p-3 rounded-md bg-dyad-accent/70 hover:bg-dyad-accent transition-colors flex items-center justify-center"
-          aria-label="Scroll down"
-        >
-          <ChevronDown size={24} className="text-white" />
-        </ScrollLink>
-      </motion.div>
+      {/* Scroll Down Button removed */}
     </section>
   );
 };

@@ -21,11 +21,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (location.pathname !== '/') {
-        setActiveSection('');
-        return;
-      }
-
+      // This logic now applies to the homepage when the navbar is visible
       const sections = navItems.filter(item => item.type === 'scroll').map(item => document.getElementById(item.to));
       const scrollPosition = window.scrollY + window.innerHeight / 2;
 
@@ -44,11 +40,7 @@ const Navbar = () => {
     return () => window.removeEventListener('change', handleScroll);
   }, [navItems, location.pathname]);
 
-  // If on the homepage, do not render the Navbar
-  if (location.pathname === '/') {
-    return null;
-  }
-
+  // Navbar is now always rendered
   const navbarClasses = "fixed top-0 left-0 right-0 z-50 shadow-lg bg-black opacity-100 pointer-events-auto transition-all duration-500";
 
   return (
