@@ -17,7 +17,7 @@ const Index = () => {
       <HeroSection />
 
       {/* Navigation Buttons Section - moved directly below HeroSection */}
-      <section className="relative z-10 -mt-64 pb-20 bg-transparent text-foreground"> {/* Adjusted margin-top to move higher */}
+      <section className="relative z-10 -mt-56 pb-20 bg-transparent text-foreground"> {/* Adjusted margin-top to move higher */}
         <div className="container mx-auto px-4 text-center">
           <motion.div
             className="flex flex-col sm:flex-row justify-center gap-6"
@@ -31,16 +31,16 @@ const Index = () => {
                 Nasza oferta
               </Button>
             </RouterLink>
-            <ScrollLink to="portfolio" smooth={true} duration={800} offset={-120}> {/* Increased offset */}
+            <ScrollLink to="portfolio" smooth={true} duration={800} offset={-80}>
               <Button className="w-full sm:w-auto px-8 py-6 text-lg bg-black text-white hover:bg-dyad-accent hover:text-white transition-all duration-300 rounded-none shadow-lg border border-gray-800 hover:border-dyad-accent">
                 Portfolio
               </Button>
             </ScrollLink>
-            <ScrollLink to="contact" smooth={true} duration={800} offset={-120}> {/* Increased offset */}
+            <ScrollLink to="contact" smooth={true} duration={800} offset={-80}>
               <Button className="w-full sm:w-auto px-8 py-6 text-lg bg-black text-white hover:bg-dyad-accent hover:text-white transition-all duration-300 rounded-none shadow-lg border border-gray-800 hover:border-dyad-accent">
                 Kontakt
               </Button>
-            </RouterLink>
+            </ScrollLink>
           </motion.div>
         </div>
       </section>
