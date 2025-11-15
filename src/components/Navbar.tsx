@@ -9,22 +9,18 @@ import { cn } from '@/lib/utils';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-  const [isScrolled, setIsScrolled] = useState(false); // New state for scroll detection
   const location = useLocation();
 
   const navItems = [
     { name: 'Start', to: 'home', type: 'scroll' },
     { name: 'Nasza oferta', to: '/oferta', type: 'router' },
-    { name: 'Oferta Twórców', to: '/oferta-tworcow', type: 'router' },
-    { name: 'Nasze Prace', to: 'portfolio', type: 'scroll' }, // Updated name here
+    { name: 'Oferta Twórców', to: '/oferta-tworcow', type: 'router' }, // Updated item for Creator Offer Page with shorter title and route
+    { name: 'Portfolio', to: 'portfolio', type: 'scroll' },
     { name: 'Kontakt', to: 'contact', type: 'scroll' },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      // Update isScrolled state
-      setIsScrolled(window.scrollY > 50); // Navbar appears after scrolling 50px
-
       if (location.pathname !== '/') {
         setActiveSection('');
         return;
@@ -44,20 +40,12 @@ const Navbar = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Call once on mount to set initial state
-    return () => window.removeEventListener('scroll', handleScroll); // Changed from 'change' to 'scroll'
+    handleScroll();
+    return () => window.removeEventListener('change', handleScroll);
   }, [navItems, location.pathname]);
 
-  // Navbar classes dynamically change based on scroll state
-  const navbarClasses = cn(
-    "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-    isScrolled || location.pathname !== '/' // Always visible on subpages or when scrolled
-      ? "bg-black shadow-lg opacity-100 pointer-events-auto"
-      : "bg-transparent shadow-none opacity-0 pointer-events-none" // Hidden and non-interactive when not scrolled on homepage
-  );
-
-  // Adjust offset for scroll links based on navbar visibility
-  const scrollOffset = isScrolled || location.pathname !== '/' ? -80 : 0; // If navbar is visible, offset by its height
+  // Navbar is always visible, no transparency logic needed
+  const navbarClasses = "fixed top-0 left-0 right-0 z-50 shadow-lg bg-black opacity-100 pointer-events-auto transition-all duration-500";
 
   return (
     <nav className={navbarClasses}>
@@ -80,11 +68,12 @@ const Navbar = () => {
                   to={item.to}
                   smooth={true}
                   duration={800}
-                  offset={scrollOffset} // Use dynamic offset
+                  offset={-80}
                   onClick={() => {
                     setIsOpen(false);
+                    // If on a subpage, navigate to home first, then scroll
                     if (location.pathname !== '/') {
-                      window.location.href = `/#${item.to}`;
+                      window.location.href = `/#${item.to}`; // Force full page reload to home and scroll
                     }
                   }}
                   className={cn(
@@ -135,11 +124,11 @@ const Navbar = () => {
                 to={item.to}
                 smooth={true}
                 duration={800}
-                offset={scrollOffset} // Use dynamic offset
+                offset={-80}
                 onClick={() => {
                   setIsOpen(false);
                   if (location.pathname !== '/') {
-                    window.location.href = `/#${item.to}`;
+                    window.location.href = `/#${item.to}`; // Force full page reload to home and scroll
                   }
                 }}
                 className={cn(
