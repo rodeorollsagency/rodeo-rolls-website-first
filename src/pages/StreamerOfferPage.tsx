@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { MonitorPlay, Camera, Megaphone, Palette, Share2, Video } from 'lucide-react'; // Icons for streamer services
+import { MonitorPlay, Camera, Megaphone, Palette, Share2, Video, BookOpen } from 'lucide-react'; // Icons for streamer services
 
 interface StreamerOfferItem {
   title: string;
