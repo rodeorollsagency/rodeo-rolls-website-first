@@ -10,18 +10,19 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   const navItems = [
     { name: 'Start', to: 'home', type: 'scroll' },
     { name: 'Nasza oferta', to: '/oferta', type: 'router' },
-    { name: 'Oferta Twórców', to: '/oferta-tworcow', type: 'router' }, // Updated item for Creator Offer Page with shorter title and route
+    { name: 'Oferta Twórców', to: '/oferta-tworcow', type: 'router' },
     { name: 'Portfolio', to: 'portfolio', type: 'scroll' },
     { name: 'Kontakt', to: 'contact', type: 'scroll' },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      if (location.pathname !== '/') {
+      if (!isHomePage) {
         setActiveSection('');
         return;
       }
@@ -39,12 +40,20 @@ const Navbar = () => {
       setActiveSection(currentActive);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => window.removeEventListener('change', handleScroll);
-  }, [navItems, location.pathname]);
+    if (isHomePage) {
+      window.addEventListener('scroll', handleScroll);
+      handleScroll();
+    } else {
+      window.removeEventListener('scroll', handleScroll);
+    }
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [navItems, isHomePage]);
 
-  // Navbar is always visible, no transparency logic needed
+  // Navbar is hidden on the homepage
+  if (isHomePage) {
+    return null;
+  }
+
   const navbarClasses = "fixed top-0 left-0 right-0 z-50 shadow-lg bg-black opacity-100 pointer-events-auto transition-all duration-500";
 
   return (
