@@ -2,7 +2,7 @@
 
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-// import OfferSection from "@/components/OfferSection"; // Removed the OfferSection import
+import OfferSection from "@/components/OfferSection"; // Import the new OfferSection
 import PortfolioSection from "@/components/PortfolioSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
@@ -12,7 +12,7 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
       <HeroSection />
-      {/* <OfferSection /> Removed the OfferSection here */}
+      <OfferSection /> {/* Add the new OfferSection here */}
       <PortfolioSection />
       <ContactSection />
       <Footer />
