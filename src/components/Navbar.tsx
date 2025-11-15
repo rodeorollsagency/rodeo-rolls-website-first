@@ -2,26 +2,27 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link as ScrollLink } from 'react-scroll';
-import { Link as RouterLink, useLocation } from 'react-router-dom'; // Import RouterLink and useLocation
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-  const location = useLocation(); // Use useLocation to check current path
+  const location = useLocation();
 
   const navItems = [
     { name: 'Start', to: 'home', type: 'scroll' },
-    { name: 'Oferta', to: '/oferta', type: 'router' }, // New item for OfferPage
+    { name: 'Nasza oferta', to: '/oferta', type: 'router' },
+    { name: 'Oferta dla streamerów', to: '/oferta-dla-streamerow', type: 'router' }, // New item for Streamer Offer Page
     { name: 'Portfolio', to: 'portfolio', type: 'scroll' },
     { name: 'Kontakt', to: 'contact', type: 'scroll' },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      if (location.pathname !== '/') { // Only track scroll sections on the homepage
-        setActiveSection(''); // No active section on other pages
+      if (location.pathname !== '/') {
+        setActiveSection('');
         return;
       }
 
@@ -39,15 +40,19 @@ const Navbar = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Set initial active section on mount
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [navItems, location.pathname]); // Re-run effect if path changes
+    handleScroll();
+    return () => window.removeEventListener('change', handleScroll);
+  }, [navItems, location.pathname]);
+
+  // Determine if the navbar should be transparent or solid black
+  const isHomepageAndTop = activeSection === 'home' && location.pathname === '/';
+  const navbarClasses = cn(
+    "fixed top-0 left-0 right-0 z-50 shadow-lg transition-all duration-500",
+    isHomepageAndTop ? "bg-transparent opacity-0 pointer-events-none" : "bg-black opacity-100 pointer-events-auto"
+  );
 
   return (
-    <nav className={cn(
-      "fixed top-0 left-0 right-0 z-50 bg-black shadow-lg transition-opacity duration-500",
-      (activeSection === 'home' && location.pathname === '/') ? "opacity-0 pointer-events-none" : "opacity-100 pointer-events-auto"
-    )}>
+    <nav className={navbarClasses}>
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <RouterLink
           to="/"
@@ -70,7 +75,7 @@ const Navbar = () => {
                   offset={-80}
                   onClick={() => setIsOpen(false)}
                   className={cn(
-                    "relative text-foreground hover:text-dyad-accent transition-colors cursor-pointer",
+                    "relative text-white hover:text-dyad-accent transition-colors cursor-pointer",
                     activeSection === item.to && location.pathname === '/' && "text-dyad-accent"
                   )}
                 >
@@ -85,7 +90,7 @@ const Navbar = () => {
                   to={item.to}
                   onClick={() => setIsOpen(false)}
                   className={cn(
-                    "relative text-foreground hover:text-dyad-accent transition-colors cursor-pointer",
+                    "relative text-white hover:text-dyad-accent transition-colors cursor-pointer",
                     location.pathname === item.to && "text-dyad-accent"
                   )}
                 >
@@ -101,7 +106,7 @@ const Navbar = () => {
 
         {/* Mobile Hamburger Menu */}
         <div className="md:hidden z-20">
-          <button onClick={() => setIsOpen(!isOpen)} className="text-foreground hover:text-dyad-accent">
+          <button onClick={() => setIsOpen(!isOpen)} className="text-white hover:text-dyad-accent">
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -120,7 +125,7 @@ const Navbar = () => {
                 offset={-80}
                 onClick={() => setIsOpen(false)}
                 className={cn(
-                  "text-foreground text-lg hover:text-dyad-accent transition-colors cursor-pointer",
+                  "text-white text-lg hover:text-dyad-accent transition-colors cursor-pointer",
                   activeSection === item.to && location.pathname === '/' && "text-dyad-accent font-semibold"
                 )}
               >
@@ -132,7 +137,7 @@ const Navbar = () => {
                 to={item.to}
                 onClick={() => setIsOpen(false)}
                 className={cn(
-                  "text-foreground text-lg hover:text-dyad-accent transition-colors cursor-pointer",
+                  "text-white text-lg hover:text-dyad-accent transition-colors cursor-pointer",
                   location.pathname === item.to && "text-dyad-accent font-semibold"
                 )}
               >

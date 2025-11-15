@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState } => 'react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -19,12 +19,10 @@ const offerCategories: OfferCategory[] = [
     title: "Social Media",
     icon: Share2,
     items: [
-      "Subskrypcje na prowadzenie social media (pakiety miesięczne: planowanie treści, publikacja, moderacja, raportowanie efektów)",
+      "Pakiet Start: podstawowe planowanie i publikacja postów, moderacja komentarzy, raport miesięczny.",
+      "Pakiet Profesjonalny: rozszerzone planowanie i kreacja treści, zaawansowana moderacja, cotygodniowe raporty i analizy.",
+      "Pakiet Premium: pełna obsługa social media: planowanie, tworzenie video, kampanie reklamowe, monitoring efektów w czasie rzeczywistym.",
       "Zdjęcia i filmiki pod social media (realizacja i obróbka materiałów idealnych do promocji w sieci)",
-      "Tworzenie miniaturek pod YouTube (atrakcyjne grafiki przyciągające widzów)",
-      "Tworzenie emoji na Twitch/Kick (unikalne emotki na potrzeby czatów transmisji)",
-      "Projektowanie layoutów na Twitch/Kick/YouTube (grafika, overlaye, panele)",
-      "Szkolenia z prowadzenia social media dla osób indywidualnych i firm (praktyczna wiedza, strategie, narzędzia)",
     ],
   },
   {
