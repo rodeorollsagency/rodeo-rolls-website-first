@@ -42,13 +42,13 @@ const PortfolioSection = () => {
     <section id="portfolio" className="min-h-screen py-20 bg-gradient-to-b from-black to-gray-900 text-foreground">
       <div className="container mx-auto px-4">
         <motion.h2
-          className="text-5xl font-bold text-center mb-12 text-dyad-accent pt-16" // Added pt-16 for spacing
+          className="text-5xl font-bold text-center mb-12 text-dyad-accent"
           initial={{ opacity: 0, y: -50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8 }}
         >
-          Nasze prace
+          Nasze Portfolio
         </motion.h2>
 
         <motion.div
