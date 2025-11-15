@@ -14,7 +14,7 @@ const Navbar = () => {
   const navItems = [
     { name: 'Start', to: 'home', type: 'scroll' },
     { name: 'Nasza oferta', to: '/oferta', type: 'router' },
-    { name: 'Oferta dla twórców internetowych', to: '/oferta-dla-tworcow-internetowych', type: 'router' }, // Updated item for Creator Offer Page
+    { name: 'Oferta Twórców', to: '/oferta-tworcow', type: 'router' }, // Updated item for Creator Offer Page with shorter title and route
     { name: 'Portfolio', to: 'portfolio', type: 'scroll' },
     { name: 'Kontakt', to: 'contact', type: 'scroll' },
   ];
@@ -44,19 +44,15 @@ const Navbar = () => {
     return () => window.removeEventListener('change', handleScroll);
   }, [navItems, location.pathname]);
 
-  // Determine if the navbar should be transparent or solid black
-  const isHomepageAndTop = activeSection === 'home' && location.pathname === '/';
-  const navbarClasses = cn(
-    "fixed top-0 left-0 right-0 z-50 shadow-lg transition-all duration-500",
-    isHomepageAndTop ? "bg-transparent opacity-0 pointer-events-none" : "bg-black opacity-100 pointer-events-auto"
-  );
+  // Navbar is always visible, no transparency logic needed
+  const navbarClasses = "fixed top-0 left-0 right-0 z-50 shadow-lg bg-black opacity-100 pointer-events-auto transition-all duration-500";
 
   return (
     <nav className={navbarClasses}>
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <RouterLink
           to="/"
-          className="cursor-pointer text-lg font-bold text-white hover:text-dyad-accent transition-colors z-20" // Ensure text-white
+          className="cursor-pointer text-lg font-bold text-white hover:text-dyad-accent transition-colors z-20"
           onClick={() => setIsOpen(false)}
         >
           <img src="/images/rr.png" alt="Logo" className="h-10 w-auto" />
@@ -73,7 +69,13 @@ const Navbar = () => {
                   smooth={true}
                   duration={800}
                   offset={-80}
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => {
+                    setIsOpen(false);
+                    // If on a subpage, navigate to home first, then scroll
+                    if (location.pathname !== '/') {
+                      window.location.href = `/#${item.to}`; // Force full page reload to home and scroll
+                    }
+                  }}
                   className={cn(
                     "relative text-white hover:text-dyad-accent transition-colors cursor-pointer",
                     activeSection === item.to && location.pathname === '/' && "text-dyad-accent"
@@ -123,7 +125,12 @@ const Navbar = () => {
                 smooth={true}
                 duration={800}
                 offset={-80}
-                onClick={() => setIsOpen(false)}
+                onClick={() => {
+                  setIsOpen(false);
+                  if (location.pathname !== '/') {
+                    window.location.href = `/#${item.to}`; // Force full page reload to home and scroll
+                  }
+                }}
                 className={cn(
                   "text-white text-lg hover:text-dyad-accent transition-colors cursor-pointer",
                   activeSection === item.to && location.pathname === '/' && "text-dyad-accent font-semibold"

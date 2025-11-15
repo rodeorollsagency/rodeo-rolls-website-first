@@ -94,7 +94,7 @@ const CreatorOfferPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Oferta dla twórców internetowych
+            Oferta Twórców
           </motion.h2>
 
           <motion.div
@@ -108,7 +108,7 @@ const CreatorOfferPage = () => {
               return (
                 <Card
                   key={index}
-                  className="bg-gray-900 border border-gray-800 hover:border-dyad-accent transition-all duration-300 cursor-pointer group shadow-lg rounded-none" // Changed to rounded-none
+                  className="bg-gray-900 border border-gray-800 hover:border-dyad-accent transition-all duration-300 cursor-pointer group shadow-lg rounded-none"
                   onClick={() => setSelectedItem(item)}
                 >
                   <CardContent className="flex flex-col items-center justify-center p-6 h-full">
@@ -128,7 +128,7 @@ const CreatorOfferPage = () => {
 
       {/* Dialog for displaying detailed item information */}
       <Dialog open={!!selectedItem} onOpenChange={() => setSelectedItem(null)}>
-        <DialogContent className="sm:max-w-[600px] bg-gray-900 text-white border-gray-700 rounded-none"> {/* Changed to rounded-none */}
+        <DialogContent className="sm:max-w-[600px] bg-gray-900 text-white border-gray-700 rounded-none">
           <DialogHeader>
             <DialogTitle className="text-dyad-accent text-3xl mb-2">{selectedItem?.title}</DialogTitle>
             <DialogDescription className="text-muted-foreground text-lg">
