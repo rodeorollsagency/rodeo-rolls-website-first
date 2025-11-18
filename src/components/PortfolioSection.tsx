@@ -21,7 +21,7 @@ const portfolioItems: PortfolioItem[] = [
   { src: '/images/syriusz-website.png', alt: 'Syriusz Website', category: 'Web Design', caption: 'Projekt Strony Syriusz' },
   { src: '/images/plakaty.png', alt: 'Posters', category: 'Druk i Fizyczne', caption: 'Projekty Plakatów' },
   { src: '/images/okladka-ksiazki.png', alt: 'Book Cover', category: 'Druk i Fizyczne', caption: 'Okładka Książki' },
-  { src: '/images/masaz-tydek.png', alt: 'Massage Tydek', category: 'Druk i Fizyczne', caption: 'Grafika Masaż Tydek' },
+  // Removed: { src: '/images/masaz-tydek.png', alt: 'Massage Tydek', category: 'Druk i Fizyczne', caption: 'Grafika Masaż Tydek' },
 ];
 
 const categories = ['Wszystkie', 'Branding', 'Web Design', 'Druk i Fizyczne']; // Updated categories

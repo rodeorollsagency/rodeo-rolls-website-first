@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [isNavbarVisible, setIsNavbarVisible] = useState(false); // New state for sticky reveal
   const location = useLocation();
 
   const navItems = [
@@ -21,27 +22,47 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // This logic now applies to the homepage when the navbar is visible
-      const sections = navItems.filter(item => item.type === 'scroll').map(item => document.getElementById(item.to));
-      const scrollPosition = window.scrollY + window.innerHeight / 2;
+      const scrollPosition = window.scrollY;
 
-      let currentActive = 'home';
-      for (const item of sections) {
-        if (item && scrollPosition >= item.offsetTop && scrollPosition < item.offsetTop + item.offsetHeight) {
-          currentActive = item.id;
-          break;
-        }
+      // Logic for sticky reveal
+      if (scrollPosition > 50) { // Show navbar after scrolling down 50px
+        setIsNavbarVisible(true);
+      } else {
+        setIsNavbarVisible(false);
       }
-      setActiveSection(currentActive);
+
+      // Logic for active section highlighting (only on homepage)
+      if (location.pathname === '/') {
+        const sections = navItems.filter(item => item.type === 'scroll').map(item => document.getElementById(item.to));
+        const currentScrollPosition = window.scrollY + window.innerHeight / 2;
+
+        let currentActive = 'home';
+        for (const item of sections) {
+          if (item && currentScrollPosition >= item.offsetTop && currentScrollPosition < item.offsetTop + item.offsetHeight) {
+            currentActive = item.id;
+            break;
+          }
+        }
+        setActiveSection(currentActive);
+      } else {
+        // If not on homepage, no scroll-based active section
+        setActiveSection('');
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => window.removeEventListener('change', handleScroll);
+    handleScroll(); // Call once on mount to set initial state
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [navItems, location.pathname]);
 
-  // Navbar is now always rendered
-  const navbarClasses = "fixed top-0 left-0 right-0 z-50 shadow-lg bg-black opacity-100 pointer-events-auto transition-all duration-500";
+  // Navbar classes for sticky reveal
+  const navbarClasses = cn(
+    "fixed top-0 left-0 right-0 z-50 shadow-lg bg-black transition-transform duration-500",
+    (isNavbarVisible || location.pathname !== '/') ? "translate-y-0" : "-translate-y-full" // Always visible on subpages
+  );
+
+  // Adjust offset for scroll links when navbar is hidden/revealed
+  const scrollOffset = (isNavbarVisible || location.pathname !== '/') ? -80 : -80; // Keep -80 for now, might need adjustment if hero section is affected
 
   return (
     <nav className={navbarClasses}>
@@ -64,12 +85,11 @@ const Navbar = () => {
                   to={item.to}
                   smooth={true}
                   duration={800}
-                  offset={-80}
+                  offset={scrollOffset}
                   onClick={() => {
                     setIsOpen(false);
-                    // If on a subpage, navigate to home first, then scroll
                     if (location.pathname !== '/') {
-                      window.location.href = `/#${item.to}`; // Force full page reload to home and scroll
+                      window.location.href = `/#${item.to}`;
                     }
                   }}
                   className={cn(
@@ -120,11 +140,11 @@ const Navbar = () => {
                 to={item.to}
                 smooth={true}
                 duration={800}
-                offset={-80}
+                offset={scrollOffset}
                 onClick={() => {
                   setIsOpen(false);
                   if (location.pathname !== '/') {
-                    window.location.href = `/#${item.to}`; // Force full page reload to home and scroll
+                    window.location.href = `/#${item.to}`;
                   }
                 }}
                 className={cn(
