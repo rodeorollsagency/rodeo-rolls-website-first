@@ -69,8 +69,28 @@ const offerCategories: OfferCategory[] = [
 const OfferPage = () => {
   const [selectedCategory, setSelectedCategory] = useState<OfferCategory | null>(null);
 
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const listVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const listItemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { opacity: 1, x: 0 },
+  };
+
   return (
-    <div className="min-h-screen bg-black text-foreground"> {/* Solid black background */}
+    <div className="min-h-screen bg-black text-foreground">
       <Navbar />
       <section id="offer-page" className="py-20 pt-32 bg-black text-foreground">
         <div className="container mx-auto px-4 text-center">
@@ -85,25 +105,32 @@ const OfferPage = () => {
 
           <motion.div
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial="hidden"
+            animate="visible"
+            variants={{
+              visible: {
+                transition: {
+                  staggerChildren: 0.1,
+                },
+              },
+            }}
           >
             {offerCategories.map((category, index) => {
               const IconComponent = category.icon;
               return (
-                <Card
-                  key={index}
-                  className="bg-gray-900 border border-gray-800 hover:border-dyad-accent transition-all duration-300 cursor-pointer group shadow-lg rounded-none" // Changed to rounded-none
-                  onClick={() => setSelectedCategory(category)}
-                >
-                  <CardContent className="flex flex-col items-center justify-center p-6 h-full">
-                    <IconComponent size={64} className="text-dyad-accent mb-4 group-hover:scale-110 transition-transform duration-300" />
-                    <h3 className="text-2xl font-semibold text-foreground group-hover:text-dyad-accent transition-colors duration-300 text-center">
-                      {category.title}
-                    </h3>
-                  </CardContent>
-                </Card>
+                <motion.div key={index} variants={cardVariants}>
+                  <Card
+                    className="bg-gray-900 border border-gray-800 hover:border-dyad-accent transition-all duration-300 cursor-pointer group shadow-lg rounded-none h-full flex flex-col justify-between"
+                    onClick={() => setSelectedCategory(category)}
+                  >
+                    <CardContent className="flex flex-col items-center justify-center p-6 h-full">
+                      <IconComponent size={64} className="text-dyad-accent mb-4 group-hover:scale-110 transition-transform duration-300" />
+                      <h3 className="text-2xl font-semibold text-foreground group-hover:text-dyad-accent transition-colors duration-300 text-center">
+                        {category.title}
+                      </h3>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               );
             })}
           </motion.div>
@@ -113,18 +140,25 @@ const OfferPage = () => {
 
       {/* Dialog for displaying detailed category information */}
       <Dialog open={!!selectedCategory} onOpenChange={() => setSelectedCategory(null)}>
-        <DialogContent className="sm:max-w-[600px] bg-gray-900 text-foreground border-gray-700 rounded-none"> {/* Changed to rounded-none */}
+        <DialogContent className="sm:max-w-[600px] bg-gray-900 text-foreground border-gray-700 rounded-none p-6">
           <DialogHeader>
-            <DialogTitle className="text-dyad-accent text-3xl mb-2">{selectedCategory?.title}</DialogTitle>
+            <DialogTitle className="text-dyad-accent text-3xl mb-4 text-center">{selectedCategory?.title}</DialogTitle>
             <DialogDescription className="text-muted-foreground text-lg">
               {selectedCategory?.items.length > 0 ? (
-                <ul className="list-disc list-inside space-y-2 text-left">
+                <motion.ul
+                  className="list-disc list-inside space-y-3 text-left pl-4"
+                  variants={listVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
                   {selectedCategory.items.map((item, itemIndex) => (
-                    <li key={itemIndex}>{item}</li>
+                    <motion.li key={itemIndex} variants={listItemVariants} className="text-white">
+                      {item}
+                    </motion.li>
                   ))}
-                </ul>
+                </motion.ul>
               ) : (
-                <p className="italic">Brak dodatkowych szczegół w tej kategorii.</p>
+                <p className="italic text-center">Brak dodatkowych szczegół w tej kategorii.</p>
               )}
             </DialogDescription>
           </DialogHeader>

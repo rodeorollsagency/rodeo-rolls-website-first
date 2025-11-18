@@ -83,8 +83,28 @@ const creatorOfferItems: CreatorOfferItem[] = [
 const CreatorOfferPage = () => {
   const [selectedItem, setSelectedItem] = useState<CreatorOfferItem | null>(null);
 
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const listVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const listItemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { opacity: 1, x: 0 },
+  };
+
   return (
-    <div className="min-h-screen bg-black text-white"> {/* Solid black background, white text */}
+    <div className="min-h-screen bg-black text-white">
       <Navbar />
       <section id="creator-offer-page" className="py-20 pt-32 bg-black text-white">
         <div className="container mx-auto px-4 text-center">
@@ -99,26 +119,33 @@ const CreatorOfferPage = () => {
 
           <motion.div
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial="hidden"
+            animate="visible"
+            variants={{
+              visible: {
+                transition: {
+                  staggerChildren: 0.1,
+                },
+              },
+            }}
           >
             {creatorOfferItems.map((item, index) => {
               const IconComponent = item.icon;
               return (
-                <Card
-                  key={index}
-                  className="bg-gray-900 border border-gray-800 hover:border-dyad-accent transition-all duration-300 cursor-pointer group shadow-lg rounded-none"
-                  onClick={() => setSelectedItem(item)}
-                >
-                  <CardContent className="flex flex-col items-center justify-center p-6 h-full">
-                    <IconComponent size={64} className="text-dyad-accent mb-4 group-hover:scale-110 transition-transform duration-300" />
-                    <h3 className="text-2xl font-semibold text-white group-hover:text-dyad-accent transition-colors duration-300 text-center mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-muted-foreground text-center">{item.description}</p>
-                  </CardContent>
-                </Card>
+                <motion.div key={index} variants={cardVariants}>
+                  <Card
+                    className="bg-gray-900 border border-gray-800 hover:border-dyad-accent transition-all duration-300 cursor-pointer group shadow-lg rounded-none h-full flex flex-col justify-between"
+                    onClick={() => setSelectedItem(item)}
+                  >
+                    <CardContent className="flex flex-col items-center justify-center p-6 h-full">
+                      <IconComponent size={64} className="text-dyad-accent mb-4 group-hover:scale-110 transition-transform duration-300" />
+                      <h3 className="text-2xl font-semibold text-white group-hover:text-dyad-accent transition-colors duration-300 text-center mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-muted-foreground text-center">{item.description}</p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               );
             })}
           </motion.div>
@@ -128,18 +155,25 @@ const CreatorOfferPage = () => {
 
       {/* Dialog for displaying detailed item information */}
       <Dialog open={!!selectedItem} onOpenChange={() => setSelectedItem(null)}>
-        <DialogContent className="sm:max-w-[600px] bg-gray-900 text-white border-gray-700 rounded-none">
+        <DialogContent className="sm:max-w-[600px] bg-gray-900 text-white border-gray-700 rounded-none p-6">
           <DialogHeader>
-            <DialogTitle className="text-dyad-accent text-3xl mb-2">{selectedItem?.title}</DialogTitle>
+            <DialogTitle className="text-dyad-accent text-3xl mb-4 text-center">{selectedItem?.title}</DialogTitle>
             <DialogDescription className="text-muted-foreground text-lg">
               {selectedItem?.details.length > 0 ? (
-                <ul className="list-disc list-inside space-y-2 text-left">
+                <motion.ul
+                  className="list-disc list-inside space-y-3 text-left pl-4"
+                  variants={listVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
                   {selectedItem.details.map((detail, detailIndex) => (
-                    <li key={detailIndex}>{detail}</li>
+                    <motion.li key={detailIndex} variants={listItemVariants} className="text-white">
+                      {detail}
+                    </motion.li>
                   ))}
-                </ul>
+                </motion.ul>
               ) : (
-                <p className="italic">Brak dodatkowych szczegół w tej kategorii.</p>
+                <p className="italic text-center">Brak dodatkowych szczegół w tej kategorii.</p>
               )}
             </DialogDescription>
           </DialogHeader>

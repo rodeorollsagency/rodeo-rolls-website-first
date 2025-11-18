@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, Instagram, Facebook } from 'lucide-react'; // Added Instagram and Facebook
+import { Mail, Phone, Instagram, Facebook } from 'lucide-react';
 
 const ContactSection = () => {
   return (
@@ -27,7 +27,7 @@ const ContactSection = () => {
         </motion.h2>
 
         <motion.div
-          className="flex flex-col items-center space-y-8"
+          className="flex flex-col md:flex-row items-center justify-center space-y-8 md:space-y-0 md:space-x-12 lg:space-x-20 mt-8"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -35,38 +35,44 @@ const ContactSection = () => {
         >
           <a
             href="mailto:kontakt@rolls.rodeo"
-            className="flex items-center text-2xl text-foreground hover:text-dyad-accent transition-colors group"
+            className="flex items-center text-xl sm:text-2xl text-foreground hover:text-dyad-accent transition-colors group"
           >
             <Mail size={32} className="mr-4 text-dyad-accent group-hover:scale-110 transition-transform" />
-            kontakt@rolls.rodeo
+            <span className="text-white">kontakt@rolls.rodeo</span>
           </a>
           <a
             href="tel:+48796172745"
-            className="flex items-center text-2xl text-foreground hover:text-dyad-accent transition-colors group"
+            className="flex items-center text-xl sm:text-2xl text-foreground hover:text-dyad-accent transition-colors group"
           >
             <Phone size={32} className="mr-4 text-dyad-accent group-hover:scale-110 transition-transform" />
-            +48 796172745
+            <span className="text-white">+48 796172745</span>
           </a>
-          <div className="flex space-x-8 mt-8"> {/* Added social media links */}
-            <a
-              href="https://www.instagram.com/rodeorolls"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-dyad-accent hover:text-foreground transition-colors group"
-              aria-label="Instagram"
-            >
-              <Instagram size={32} className="group-hover:scale-110 transition-transform" />
-            </a>
-            <a
-              href="https://www.facebook.com/RodeoRollsCreative"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-dyad-accent hover:text-foreground transition-colors group"
-              aria-label="Facebook"
-            >
-              <Facebook size={32} className="group-hover:scale-110 transition-transform" />
-            </a>
-          </div>
+        </motion.div>
+        <motion.div
+          className="flex justify-center space-x-8 mt-12"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <a
+            href="https://www.instagram.com/rodeorolls"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-dyad-accent hover:text-foreground transition-colors group"
+            aria-label="Instagram"
+          >
+            <Instagram size={40} className="group-hover:scale-110 transition-transform" />
+          </a>
+          <a
+            href="https://www.facebook.com/RodeoRollsCreative"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-dyad-accent hover:text-foreground transition-colors group"
+            aria-label="Facebook"
+          >
+            <Facebook size={40} className="group-hover:scale-110 transition-transform" />
+          </a>
         </motion.div>
       </div>
     </section>
