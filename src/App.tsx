@@ -6,9 +6,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import OfferPage from "./pages/OfferPage";
 import CreatorOfferPage from "./pages/CreatorOfferPage";
-import PrivacyPolicy from "./pages/PrivacyPolicy"; // Import the new PrivacyPolicy page
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
-import CookieConsent from "./components/CookieConsent"; // Import the new CookieConsent component
+import CookieConsent from "./components/CookieConsent";
+import BackToTopButton from "./components/BackToTopButton"; // Import the new BackToTopButton component
 
 const queryClient = new QueryClient();
 
@@ -22,11 +23,12 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/oferta" element={<OfferPage />} />
           <Route path="/oferta-tworcow" element={<CreatorOfferPage />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} /> {/* Add the new route */}
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <CookieConsent /> {/* Render the CookieConsent component */}
+        <CookieConsent />
+        <BackToTopButton /> {/* Render the BackToTopButton component */}
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
